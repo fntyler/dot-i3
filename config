@@ -3,11 +3,11 @@
 
 set $mod Mod4
 
-font pango:monospace 8
+# disable scrolling in tabbed and stacked windows
+bindsym button4 nop
+bindsym button5 nop
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+font pango:Hack Regular 12
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -18,11 +18,17 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
+# manual lock screen
+bindsym $mod+Ctrl+l exec --no-startup-id i3lock -i ~/.config/i3/wp/matrixtext.png -tfe
+
+# start apps
 exec --no-startup-id nm-applet
+exec --no-startup-id flameshot
+exec --no-startup-id copyq
+exec --no-startup-id dunst
+exec --no-startup-id gnome-keyring-daemon --start
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -39,18 +45,14 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+# todo: create variable for terminal emulator
+bindsym $mod+Return exec --no-startup-id terminator -g ~/.config/terminator/config
+
+# start a terminal w/ ranger (file manager)
+bindsym $mod+Shift+Return exec --no-startup-id terminator -g ~/.config/terminator/config -e ranger 
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+j focus left
@@ -84,6 +86,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+popup_during_fullscreen smart
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -92,15 +95,21 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+Ctrl+j floating toggle
+bindsym $mod+y sticky toggle
+
+# change container size with right-click toggle
+bindsym $mod+button3 floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+bindsym $mod+Ctrl+k focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+Shift+a focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -141,8 +150,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -159,7 +170,6 @@ mode "resize" {
         bindsym l resize shrink height 10 px or 10 ppt
         bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -173,8 +183,211 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# WIP: changing colors
+client.focused          #0388A6 #0388A6 #180326 #180326   #0D0A0B
+#client.focused_inactive #0388A6 #024059 #0388A6 #484e50   #180326
+#client.unfocused        #024059 #024059 #0388A6 #ffffff   #0D0A0B
+client.urgent		#0388A6 #f08080 #0388A6 #f08080   #f08080
+#client.background	#0388A6
 bar {
-        status_command i3status
+	status_command i3status
+	# disable wheel scrolling on i3-bar
+	bindsym button4 nop
+	bindsym button5 nop
+	#status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	tray_output primary
+
+colors {
+#	background #024059
+#	statusline #024059
+#	separator  #180326
+#
+#	focused_workspace 	#024059 #0388A6 #180326
+#	active_workspace 	#0388A6 #024059 #180326
+#	inactive_workspace 	#024059 #024059 #180326
+	urgent_workspace 	#f08080 #f08080 #180326
+#	binding_mode  		#024059 #0388A6 #180326
+	}
 }
+
+# Automatic back-and-forth w/ switching workspace
+workspace_auto_back_and_forth yes
+
+# Show windows drawn with marks (mod+m / mod+g)
+show_marks yes
+
+# Change window pane/window tile title
+bindsym $mod+t exec i3-msg title_format `zenity --title="i3-msg title_format" --text "Enter a title" --entry)`
+
+# rename current workspace
+bindsym $mod+Shift+n exec i3-input -F 'rename workspace to "%s"' -P 'New name: '
+
+# mark and focus specific window with i3-input
+bindsym $mod+m exec i3-input -F 'mark %s' -l 5 -P 'Mark: '
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 5 -P 'Goto: '
+
+# rofi menu
+set $mode_rofi <rofi> [1] window  [2] run  [3] ssh
+mode "$mode_rofi" {
+
+	bindsym 1 exec --no-startup-id exec rofi -show window, mode "default"
+	bindsym 2 exec --no-startup-id exec rofi -show run, mode "default"
+	bindsym 3 exec --no-startup-id exec rofi -show ssh, mode "default"
+        
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+d mode "$mode_rofi"
+
+# todo: add meaningful comment here
+bindsym $mod+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e bash -rc "{cmd} && read"'
+
+# xrandr display preset menu
+set $mode_xrandr-shortcut <displays> [1] -laptop  [2] +laptop  [3] 3external |  [Shift+] laptop only
+mode "$mode_xrandr-shortcut" {
+
+	bindsym 1 exec --no-startup-id \
+	xrandr --output DP-2-1 \
+	--primary \
+	--mode 1920x1080 \
+	--rate 144 \
+	--right-of DP-2-3 \
+	--output DP-2-3 \
+	--mode 2560x1440 \
+	--output DP-2-2 \
+	--off \
+	--output eDP-1 \
+	--off; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+
+	bindsym Shift+1 exec --no-startup-id \
+	xrandr --output eDP-1 \
+	--primary \
+	--mode 1920x1080 \
+	--output DP-2-1 \
+	--off \
+	--output DP-2-3 \
+	--off; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+
+	bindsym 2 exec --no-startup-id \
+	xrandr --output eDP-1 \
+	--mode 1920x1080 \
+	--below DP-2-3 \
+	--output DP-2-1 \
+	--mode 1920x1080 \
+	--primary \
+	--rate 144 \
+	--output DP-2-3 \
+	--mode 2560x1440 \
+	--left-of DP-2-1; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+
+	bindsym Shift+2 exec --no-startup-id \
+	xrandr --output eDP-1 \
+	--primary \
+	--mode 1920x1080 \
+	--output DP-2-1 \
+	--off \
+	--output DP-2-3 \
+	--off; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+
+	bindsym 3 exec --no-startup-id xrandr --output eDP-1 --off \
+    --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --off --output DP-2 --off --output HDMI-3 --off \
+    --output DP-2-1 --primary --mode 1920x1080 \
+    --output DP-2-2 --mode 2560x1440 --right-of DP-2-1 --rotate left \
+    --output DP-2-3 --mode 2560x1440 --left-of DP-2-1; \
+    exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+
+	bindsym Shift+3 exec --no-startup-id \
+	xrandr --output eDP-1 \
+	--primary \
+	--mode 1920x1080 \
+	--output DP-2-1 \
+	--off \
+	--output DP-2-2 \
+	--off \
+	--output DP-2-3 \
+	--off; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+    
+    # in-office setup 2
+	bindsym 4 exec --no-startup-id \
+    xrandr --output eDP-1 \
+    --primary \
+    --mode 1920x1080 \
+    --output DP-2-1 \
+    --mode 1920x1080 \
+    --right-of eDP-1 \
+    --output DP-2-3 \
+    --mode 1920x1080 \
+    --left-of eDP-1 ; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+
+    # disconnect in-office setup 2
+	bindsym Shift+4 exec --no-startup-id \
+    xrandr --output eDP-1 \
+    --primary \
+    --mode 1920x1080 \
+    --output DP-2-1 \
+    --off \
+    --output DP-2-3 \
+    --off ; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+p mode "$mode_xrandr-shortcut"
+
+# workspace jumper menu
+set $mode_move_output <move_output> [h] Left  [j] Down  [k] Up  [l] Right | [a] DP-2-3 [d] DP-2-2
+
+mode "$mode_move_output" {
+
+	bindsym h exec --no-startup-id i3-msg move workspace to output left, mode "default" 
+        bindsym j exec --no-startup-id i3-msg move workspace to output down, mode "default" 
+        bindsym k exec --no-startup-id i3-msg move workspace to output up, mode "default" 
+        bindsym l exec --no-startup-id i3-msg move workspace to output right, mode "default" 
+        bindsym a exec --no-startup-id i3-msg move workspace to output DP-2-3, mode "default" 
+        bindsym d exec --no-startup-id i3-msg move workspace to output DP-2-2, mode "default" 
+        
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+m mode "$mode_move_output"
+
+# dependency: fuzzmenu.sh
+bindsym $mod+Shift+o exec --no-startup-id terminator -g ~/.config/terminator/config --command="/usr/local/bin/fuzzmenu.sh" --title 'FuzzMenu'
+
+# Open Brave-Browser
+# todo: add variable for web-browser
+bindsym $mod+Shift+w exec --no-startup-id brave-browser
+
+# Open Brave-Browser - Incognito
+# todo: add variable for web-browser
+bindsym $mod+Shift+i exec --no-startup-id brave-browser --new-window --incognito
+
+# Screenshoter (flameshot v12.1.0)
+bindsym $mod+x exec --no-startup-id flameshot gui
+
+# dendency: sshMissionControl.sh
+# todo: improve or replace this
+bindsym $mod+Ctrl+i exec --no-startup-id terminator -g ~/.config/terminator/config --command=/home/th-bia/milwaukee/sshMissionControl.sh
+
+# dependencies required: script-launcher.sh
+# todo: improve or replace or remove this
+bindsym $mod+u exec --no-startup-id terminator -g ~/.config/terminator/config --command=/home/th-bia/milwaukee/script-launcher.sh
+
+# scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# scratchpad into vi/vim/nvim
+bindsym $mod+n exec --no-startup-id terminator -g ~/.config/terminator/config --command="nvim /tmp/scratch-$$.md" --title 'Scratch'
+
+# window-specific
+for_window [title="Scratch"] sticky enable
+for_window [title="Scratch"] floating enable
+for_window [title="FuzzMenu"] floating enable
+for_window [title="Terminator"] border pixel 2
+
+# todo: meaningful comment or move to better location
+#smart_borders no_gaps
+hide_edge_borders smart_no_gaps
