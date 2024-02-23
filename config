@@ -184,24 +184,29 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # WIP: changing colors
-client.focused          #0388A6 #0388A6 #180326 #180326   #0D0A0B
+# #915c83 Pink
+# #69915c Green
+# #5c9185 Blue
+# #010101 Black
+#client.focused          #0388A6 #0388A6 #180326 #180326   #0D0A0B
+client.focused          #69915c #69915c #010101 #010101   #0D0A0B
 #client.focused_inactive #0388A6 #024059 #0388A6 #484e50   #180326
 #client.unfocused        #024059 #024059 #0388A6 #ffffff   #0D0A0B
 client.urgent		#0388A6 #f08080 #0388A6 #f08080   #f08080
 #client.background	#0388A6
 bar {
-	status_command i3status
-	# disable wheel scrolling on i3-bar
-	bindsym button4 nop
-	bindsym button5 nop
-	#status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	bindsym button4 nop # disable wheel scrolling on i3-bar
+	bindsym button5 nop # disable wheel scrolling on i3-bar
+# Uncomment for debugging
+	#status_command SCRIPT_DIR=~/.config/i3/blocklets 2>/tmp/i3blocks.err /usr/local/bin/i3blocks -vvv -c ~/.config/i3/i3blocks.conf | tee /tmp/i3blocks.out
+	status_command SCRIPT_DIR=~/.config/i3/blocklets 2>/tmp/i3blocks.err /usr/local/bin/i3blocks -vvv -c ~/.config/i3/i3blocks.conf | tee /tmp/i3blocks.out
 	tray_output primary
 
 colors {
-#	background #024059
-#	statusline #024059
-#	separator  #180326
-#
+	background #010101
+	statusline #69915c
+	separator  #915c83
+
 #	focused_workspace 	#024059 #0388A6 #180326
 #	active_workspace 	#0388A6 #024059 #180326
 #	inactive_workspace 	#024059 #024059 #180326
