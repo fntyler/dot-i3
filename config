@@ -388,10 +388,11 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+n exec --no-startup-id terminator -g ~/.config/terminator/config --command="nvim /tmp/scratch-$$.md" --title 'Scratch'
 
 # window-specific
-for_window [title="Scratch"] sticky enable
-for_window [title="Scratch"] floating enable
+for_window [title="Scratch"] sticky enable, floating enable
 for_window [title="FuzzMenu"] floating enable
 for_window [title="Terminator"] border pixel 2
+for_window [title="^zabbix01.*"] move container to workspace 7
+assign [title=".*Microsoft Teams classic$"] → 4
 
 # todo: meaningful comment or move to better location
 #smart_borders no_gaps
