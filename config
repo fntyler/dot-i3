@@ -46,7 +46,7 @@ tiling_drag modifier titlebar
 
 # start a terminal
 # todo: create variable for terminal emulator
-bindsym $mod+Return exec --no-startup-id terminator -g ~/.config/terminator/config
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # start a terminal w/ ranger (file manager)
 bindsym $mod+Shift+Return exec --no-startup-id terminator -g ~/.config/terminator/config -e ranger 
