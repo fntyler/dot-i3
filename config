@@ -203,6 +203,7 @@ client.focused          #69915c #69915c #010101 #010101   #0D0A0B
 #client.unfocused        #024059 #024059 #0388A6 #ffffff   #0D0A0B
 client.urgent		#0388A6 #f08080 #0388A6 #f08080   #f08080
 #client.background	#0388A6
+
 bar {
 	bindsym button4 nop # disable wheel scrolling on i3-bar
 	bindsym button5 nop # disable wheel scrolling on i3-bar
@@ -396,7 +397,7 @@ bindsym $mod+n exec --no-startup-id terminator -g ~/.config/terminator/config --
 # window-specific
 for_window [title="Scratch"] sticky enable, floating enable
 for_window [title="FuzzMenu"] floating enable
-for_window [title="tmux-controller"] floating enable
+for_window [title="tmux-controller"] floating enable, resize set 1050 500
 for_window [title="Terminator"] border pixel 2
 assign [title=".*Microsoft Teams classic$"] → 4
 
