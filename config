@@ -2,6 +2,8 @@
 # version: i3 v4.22 amd64
 
 set $mod Mod4
+set $sh_fuzzmenu "$HOME/.config/milwaukee/fuzzmenu.sh"
+set $sh_tmux-controller "$HOME/.config/milwaukee/tmux-controller.sh"
 
 # disable scrolling in tabbed and stacked windows
 bindsym button4 nop
@@ -48,8 +50,15 @@ tiling_drag modifier titlebar
 # todo: create variable for terminal emulator
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
-# start a terminal w/ ranger (file manager)
-bindsym $mod+Shift+Return exec --no-startup-id terminator -g ~/.config/terminator/config -e ranger 
+# start a terminal w/ "tmux-controller"
+bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal \
+    --title "tmux-controller" \
+    --command $sh_tmux-controller
+
+# start a terminal w/ "fuzzmenu"
+bindsym $mod+Shift+o exec --no-startup-id i3-sensible-terminal \
+    --title 'FuzzMenu' \
+    --command $sh_fuzzmenu
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -358,9 +367,6 @@ mode "$mode_move_output" {
 
 bindsym $mod+Shift+m mode "$mode_move_output"
 
-# dependency: fuzzmenu.sh
-bindsym $mod+Shift+o exec --no-startup-id terminator -g ~/.config/terminator/config --command="/usr/local/bin/fuzzmenu.sh" --title 'FuzzMenu'
-
 # Open Brave-Browser
 # todo: add variable for web-browser
 bindsym $mod+Shift+w exec --no-startup-id brave-browser
@@ -390,6 +396,7 @@ bindsym $mod+n exec --no-startup-id terminator -g ~/.config/terminator/config --
 # window-specific
 for_window [title="Scratch"] sticky enable, floating enable
 for_window [title="FuzzMenu"] floating enable
+for_window [title="tmux-controller"] floating enable
 for_window [title="Terminator"] border pixel 2
 assign [title=".*Microsoft Teams classic$"] → 4
 
