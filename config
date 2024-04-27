@@ -4,6 +4,7 @@
 set $mod Mod4
 set $sh_fuzzmenu "$HOME/.config/milwaukee/fuzzmenu.sh"
 set $sh_tmux-controller "$HOME/.config/milwaukee/tmux-controller.sh"
+set $browser firefox
 
 # disable scrolling in tabbed and stacked windows
 bindsym button4 nop
@@ -368,13 +369,12 @@ mode "$mode_move_output" {
 
 bindsym $mod+Shift+m mode "$mode_move_output"
 
-# Open Brave-Browser
-# todo: add variable for web-browser
-bindsym $mod+Shift+w exec --no-startup-id brave-browser
+# launch browser
+bindsym $mod+Shift+w exec --no-startup-id $browser
 
-# Open Brave-Browser - Incognito
-# todo: add variable for web-browser
-bindsym $mod+Shift+i exec --no-startup-id brave-browser --new-window --incognito
+# launch browser private
+bindsym $mod+Shift+i exec --no-startup-id $browser \
+    --private-window
 
 # Screenshoter (flameshot v12.1.0)
 bindsym $mod+x exec --no-startup-id flameshot gui
