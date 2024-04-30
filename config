@@ -404,3 +404,10 @@ assign [title=".*Microsoft Teams classic$"] → 4
 # todo: meaningful comment or move to better location
 #smart_borders no_gaps
 hide_edge_borders smart_no_gaps
+
+#capslock indicator
+mode "CAPSLOCK" {
+    bindsym Caps_Lock mode "default"
+    }
+bindsym Caps_Lock mode "CAPSLOCK"
+
