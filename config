@@ -54,7 +54,7 @@ bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # start a terminal w/ "tmux-controller"
 bindsym $mod+Shift+Return exec --no-startup-id $terminal \
-    ---title "tmux-controller" \
+    --title "tmux-controller" \
     --command $sh_tmux-controller
 
 # start a terminal w/ "fuzzmenu"
