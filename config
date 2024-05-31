@@ -5,6 +5,7 @@ set $mod Mod4
 set $sh_fuzzmenu "$HOME/.config/milwaukee/fuzzmenu.sh"
 set $sh_tmux-controller "$HOME/.config/milwaukee/tmux-controller.sh"
 set $browser firefox
+set $terminal xfce4-terminal
 
 # disable scrolling in tabbed and stacked windows
 bindsym button4 nop
@@ -52,13 +53,13 @@ tiling_drag modifier titlebar
 bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # start a terminal w/ "tmux-controller"
-bindsym $mod+Shift+Return exec --no-startup-id i3-sensible-terminal \
-    --title "tmux-controller" \
+bindsym $mod+Shift+Return exec --no-startup-id $terminal \
+    ---title "tmux-controller" \
     --command $sh_tmux-controller
 
 # start a terminal w/ "fuzzmenu"
-bindsym $mod+Shift+o exec --no-startup-id i3-sensible-terminal \
-    --title 'FuzzMenu' \
+bindsym $mod+Shift+o exec --no-startup-id $terminal \
+    --title "FuzzMenu" \
     --command $sh_fuzzmenu
 
 # kill focused window
