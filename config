@@ -390,7 +390,7 @@ bindsym $mod+Shift+i exec --no-startup-id $browser \
 # Screenshoter (flameshot v12.1.0)
 bindsym $mod+x exec --no-startup-id flameshot gui
 
-# dendency: sshMissionControl.sh
+# dependency: sshMissionControl.sh
 # todo: improve or replace this
 bindsym $mod+Ctrl+i exec --no-startup-id terminator -g ~/.config/terminator/config --command=/home/th-bia/milwaukee/sshMissionControl.sh
 
