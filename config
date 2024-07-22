@@ -194,11 +194,15 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# window decorations - colors
+# syntax: <colorclass> <border> <background> <text> <indicator> <child_border>
+
 # WIP: changing colors
 # #915c83 Pink
 # #69915c Green
 # #5c9185 Blue
 # #010101 Black
+
 #client.focused          #0388A6 #0388A6 #180326 #180326   #0D0A0B
 client.focused          #69915c #69915c #010101 #010101   #0D0A0B
 #client.focused_inactive #0388A6 #024059 #0388A6 #484e50   #180326
