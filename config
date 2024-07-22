@@ -416,7 +416,7 @@ assign [title=".*Microsoft Teams classic$"] → 4
 #smart_borders no_gaps
 hide_edge_borders smart_no_gaps
 
-#capslock indicator
+# capslock indicator
 mode "CAPSLOCK" {
     bindsym Caps_Lock mode "default"
     }
