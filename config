@@ -211,24 +211,27 @@ client.urgent		#0388A6 #f08080 #0388A6 #f08080   #f08080
 #client.background	#0388A6
 
 bar {
-	bindsym button4 nop # disable wheel scrolling on i3-bar
-	bindsym button5 nop # disable wheel scrolling on i3-bar
-    # Uncomment for debugging
-	#status_command SCRIPT_DIR=~/.config/i3/blocklets 2>/tmp/i3blocks.err /usr/local/bin/i3blocks -vvv -c ~/.config/i3/i3blocks.conf | tee /tmp/i3blocks.out
-	status_command SCRIPT_DIR=~/.config/i3/blocklets /usr/local/bin/i3blocks -c ~/.config/i3/i3blocks.conf
-	tray_output primary
+        bindsym button4 nop # disable wheel scrolling on i3-bar
+        bindsym button5 nop # disable wheel scrolling on i3-bar
+        mode hide
+        hidden_state hide
+        tray_output primary
+    
+        # Uncomment for debugging
+        #status_command SCRIPT_DIR=~/.config/i3/blocklets 2>/tmp/i3blocks.err /usr/local/bin/i3blocks -vvv -c ~/.config/i3/i3blocks.conf | tee /tmp/i3blocks.out
+        status_command SCRIPT_DIR=~/.config/i3/blocklets /usr/local/bin/i3blocks -c ~/.config/i3/i3blocks.conf
 
-colors {
-	background #010101
-	statusline #69915c
-	separator  #915c83
+        colors {
+                background #010101
+                statusline #69915c
+                separator  #915c83
 
-#	focused_workspace 	#024059 #0388A6 #180326
-#	active_workspace 	#0388A6 #024059 #180326
-#	inactive_workspace 	#024059 #024059 #180326
-	urgent_workspace 	#f08080 #f08080 #180326
-#	binding_mode  		#024059 #0388A6 #180326
-	}
+                #focused_workspace 	#024059 #0388A6 #180326
+                #active_workspace 	#0388A6 #024059 #180326
+                #inactive_workspace 	#024059 #024059 #180326
+                urgent_workspace 	#f08080 #f08080 #180326
+                #binding_mode  		#024059 #0388A6 #180326
+                }
 }
 
 # Automatic back-and-forth w/ switching workspace
