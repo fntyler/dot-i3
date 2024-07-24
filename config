@@ -203,12 +203,11 @@ bindsym $mod+r mode "resize"
 # #5c9185 Blue
 # #010101 Black
 
-#client.focused          #0388A6 #0388A6 #180326 #180326   #0D0A0B
-client.focused          #69915c #69915c #010101 #010101   #0D0A0B
-#client.focused_inactive #0388A6 #024059 #0388A6 #484e50   #180326
-#client.unfocused        #024059 #024059 #0388A6 #ffffff   #0D0A0B
-client.urgent		#0388A6 #f08080 #0388A6 #f08080   #f08080
-#client.background	#0388A6
+client.focused          #69915c #69915c #69915c #69915c #69915c #69915c
+client.focused_inactive #d3d3d3 #d3d3d3 #d3d3d3 #d3d3d3 #010101 #010101
+client.unfocused        #010101 #010101 #010101 #69915c #010101
+client.urgent           #0388A6 #f08080 #0388A6 #f08080   #f08080
+client.background       #0388A6
 
 bar {
         bindsym button4 nop # disable wheel scrolling on i3-bar
