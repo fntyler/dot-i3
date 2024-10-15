@@ -22,7 +22,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i ~/.config/i3/wp/matrixtext.png -tfe --nofork
 
 # manual lock screen
 bindsym $mod+Ctrl+l exec --no-startup-id i3lock -i ~/.config/i3/wp/matrixtext.png -tfe
@@ -32,7 +32,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id flameshot
 exec --no-startup-id copyq
 exec --no-startup-id dunst
-exec --no-startup-id gnome-keyring-daemon --start
+exec --no-startup-id pkill gnome-keyring-d && dbus-update-activation-environment --all && gnome-keyring-daemon --start --components=secrets,ssh --daemonize
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
