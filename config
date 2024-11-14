@@ -4,8 +4,10 @@
 set $mod Mod4
 set $sh_fuzzmenu "$HOME/.config/milwaukee/fuzzmenu.sh"
 set $sh_tmux-controller "$HOME/.config/milwaukee/tmux-controller.sh"
+set $sh_fszsfh "$HOME/.config/milwaukee/fszsfh.sh"
 set $browser firefox
 set $terminal xfce4-terminal
+set $terminal_two alacritty
 
 # disable scrolling in tabbed and stacked windows
 bindsym button4 nop
@@ -61,6 +63,11 @@ bindsym $mod+Shift+Return exec --no-startup-id $terminal \
 bindsym $mod+Shift+o exec --no-startup-id $terminal \
     --title "FuzzMenu" \
     --command $sh_fuzzmenu
+
+# wip: launch alacritty
+bindsym $mod+o exec --no-startup-id $terminal_two \
+    --title "fszsfh" \
+    --command $sh_fszsfh
 
 # kill focused window
 bindsym $mod+Shift+q kill
