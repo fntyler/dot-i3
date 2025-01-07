@@ -4,10 +4,11 @@
 set $mod Mod4
 set $sh_fuzzmenu "$HOME/.config/milwaukee/fuzzmenu.sh"
 set $sh_tmux-controller "$HOME/.config/milwaukee/tmux-controller.sh"
-set $sh_fszsfh "$HOME/.config/milwaukee/fszsfh.sh"
+set $tmux_sshenizer "$HOME/dev/tmux-sshenizer/tmux-sshenizer.sh"
 set $browser firefox
 set $terminal xfce4-terminal
-set $terminal_two alacritty
+set $alacritty alacritty
+set $terminal_three ghostty
 
 # disable scrolling in tabbed and stacked windows
 bindsym button4 nop
@@ -52,7 +53,8 @@ tiling_drag modifier titlebar
 
 # launch a terminal
 # todo: create variable for terminal emulator
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+# bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id $terminal
 
 # launch a terminal w/ "tmux-controller"
 bindsym $mod+Shift+Return exec --no-startup-id $terminal \
@@ -64,10 +66,9 @@ bindsym $mod+Shift+o exec --no-startup-id $terminal \
     --title "FuzzMenu" \
     --command $sh_fuzzmenu
 
-# wip: launch alacritty
-bindsym $mod+o exec --no-startup-id $terminal_two \
-    --title "fszsfh" \
-    --command $sh_fszsfh
+bindsym $mod+o exec --no-startup-id $alacritty \
+    --title "tmux-sshenizer" \
+    --command $tmux_sshenizer
 
 # kill focused window
 bindsym $mod+Shift+q kill
