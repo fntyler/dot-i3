@@ -397,14 +397,6 @@ bindsym $mod+Shift+i exec --no-startup-id $browser \
 # Screenshoter (flameshot v12.1.0)
 bindsym $mod+x exec --no-startup-id flameshot gui
 
-# dependency: sshMissionControl.sh
-# todo: improve or replace this
-bindsym $mod+Ctrl+i exec --no-startup-id terminator -g ~/.config/terminator/config --command=/home/th-bia/milwaukee/sshMissionControl.sh
-
-# dependencies required: script-launcher.sh
-# todo: improve or replace or remove this
-bindsym $mod+u exec --no-startup-id terminator -g ~/.config/terminator/config --command=/home/th-bia/milwaukee/script-launcher.sh
-
 # scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
