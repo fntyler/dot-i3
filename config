@@ -415,6 +415,7 @@ bindsym $mod+n exec --no-startup-id terminator -g ~/.config/terminator/config --
 # window-specific
 for_window [title="Scratch"] sticky enable, floating enable
 for_window [title="FuzzMenu"] floating enable
+#for_window [title="fszsfh"] title_format "<span size='large'>%title</span>"
 for_window [title="tmux-controller"] floating enable, resize set 1050 500
 for_window [title="Terminator"] border pixel 2
 assign [title=".*Microsoft Teams classic$"] → 4
