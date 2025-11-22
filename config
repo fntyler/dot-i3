@@ -284,7 +284,7 @@ bindsym $mod+d mode "$mode_rofi"
 bindsym $mod+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e bash -rc "{cmd} && read"'
 
 # xrandr display preset menu
-set $mode_xrandr-shortcut <displays> [1] -laptop  [2] +laptop  [3] 3external |  [Shift+] laptop only
+set $mode_xrandr-shortcut <displays> [1] -laptop  [2] +laptop  [3] 3ex [4] wide|  [Shift+] laptop only
 mode "$mode_xrandr-shortcut" {
 
 	bindsym 1 exec --no-startup-id \
@@ -341,27 +341,21 @@ mode "$mode_xrandr-shortcut" {
 	--output DP-2-3 \
 	--off; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
     
-    # in-office setup 2
+    # wide screen with thinkpad dock
 	bindsym 4 exec --no-startup-id \
     xrandr --output eDP-1 \
-    --primary \
-    --mode 1920x1080 \
-    --output DP-2-1 \
-    --mode 1920x1080 \
-    --right-of eDP-1 \
-    --output DP-2-3 \
-    --mode 1920x1080 \
-    --left-of eDP-1 ; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+    --auto \
+    --output DP-1-1 \
+    --mode 3440x1440 \
+    --rate 60 \
+    --above eDP-1, mode "default"
 
-    # disconnect in-office setup 2
+    # disconnect wide screen with thinkpad dock
 	bindsym Shift+4 exec --no-startup-id \
     xrandr --output eDP-1 \
-    --primary \
-    --mode 1920x1080 \
-    --output DP-2-1 \
-    --off \
-    --output DP-2-3 \
-    --off ; exec --no-startup-id feh --bg-fill ~/.config/i3/wp/grey-shapes-2560x1440.jpg, mode "default"
+    --auto \
+    --output DP-1-1 \
+    --off, mode "default"
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
