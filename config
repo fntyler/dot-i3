@@ -6,7 +6,7 @@ set $sh_fuzzmenu "$HOME/.config/milwaukee/fuzzmenu.sh"
 set $sh_tmux-controller "$HOME/.config/milwaukee/tmux-controller.sh"
 set $tmux_sshenizer "$HOME/dev/tmux-sshenizer/tmux-sshenizer.sh"
 set $browser firefox
-set $terminal xfce4-terminal
+set $terminal alacritty
 set $alacritty alacritty
 set $terminal_three ghostty
 
